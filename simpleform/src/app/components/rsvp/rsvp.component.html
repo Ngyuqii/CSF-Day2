@@ -1,0 +1,65 @@
+<h1>RSVP</h1>
+
+<form [formGroup]="rsvpForm" (ngSubmit)="processForm()">
+    <table>
+      <tr>
+        <td>Name:</td>
+        <td>
+          <input type="text" size="30" formControlName="name">
+          <div *ngIf="invalidControl('name')">
+            Please enter your name.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td>
+          <input type="email" size="30" formControlName="email">
+          <div *ngIf="invalidControl('email')">
+            Please enter a valid email.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Age:</td>
+        <td>
+          <input type="number" min="18" formControlName="age">
+          <div *ngIf="invalidControl('age')">
+            You have to be at least 18.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Attending:</td>
+        <td>
+          <select formControlName="attendance">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+          <div *ngIf="invalidControl('attendance')">
+            Please indicate if you will be attending.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="submit" [disabled]="rsvpForm.invalid">
+            RSVP
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <div *ngIf="rsvpStatus == 'yes'">
+        We look forward to seeing you.
+    </div>
+  
+    <!-- Display pristine status
+    <p>
+        Pristine:{{rsvpForm.pristine}}<br>
+        Dirty:{{rsvpForm.dirty}}
+    </p>
+    -->
+  
+  </form>
+  
