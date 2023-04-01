@@ -1,0 +1,22 @@
+<h2>Cart Items</h2>
+
+<div *ngIf="contents.length < 1">
+    <h3>Your cart is empty.</h3>
+</div>
+<div *ngIf="contents.length > 0">
+    <table>
+        <tr>
+            <th>Item Name</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+        </tr>
+        <tr *ngFor="let c of contents; let i = index">
+            <td>{{ c.item }}</td>
+            <td>${{ c.unitPrice }}</td>
+            <td>{{ c.quantity }} ea</td>
+            <td><button (click)="RemoveItem(i)">x</button></td>
+        </tr>
+    </table>
+</div>
+

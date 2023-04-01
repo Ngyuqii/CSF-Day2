@@ -1,0 +1,5 @@
+.beside {
+	display: flex;
+	flex-direction: columns;
+	justify-content: space-around;
+}

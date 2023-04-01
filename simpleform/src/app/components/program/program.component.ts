@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {  Subject } from 'rxjs';
+import {  Observable, Subject, debounceTime } from 'rxjs';
 import { Activity } from 'src/app/models';
 
 @Component({
@@ -14,14 +14,18 @@ export class ProgramComponent implements OnInit {
   activityForm!: FormGroup;
   programArray!: FormArray;
 
+  obs!: Observable<any>;
+
   @Output()
   onNewActivity = new Subject<Activity>();
 
   constructor(private fb: FormBuilder){ }
 
   //Initialize form creation
+  //Observable emits event on every value change of the form with a delay of 500ms
   ngOnInit(): void {
     this.activityForm = this.createActivityForm();
+    this.obs = this.activityForm.valueChanges.pipe(debounceTime(500));
   }
 
   //Method to create a form with form controls and validators
