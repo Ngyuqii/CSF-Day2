@@ -1,0 +1,47 @@
+<form [formGroup]="activityForm" (ngSubmit)="registerActivity()">
+
+  <table>
+    <tr>
+      <td>Apparatus:</td>
+      <td>
+        <input type="text" size="30" formControlName="apparatus">
+        <div *ngIf="invalidControl('apparatus')">
+            Please key in your choice of apparatus.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+          <button type="button" [disabled]="invalidControl('apparatus')" 
+          (click)="addProgram()">Add Program</button>
+      </td>
+      <td>
+        <button type="submit" [disabled]="invalidForm()">
+          Register
+        </button>
+    </td>
+    </tr>
+  </table>
+
+  <div *ngIf="programArray.controls.length > 0">
+    <h2>Registration</h2>
+    <table>
+        <tr>
+          <th>Program</th>
+          <th>Date</th>
+        </tr>
+      <tbody formArrayName="programs">
+        <tr *ngFor="let p of programArray.controls; let i =index" [formGroupName]="i">
+          <td>
+            <input type="text" size="40" formControlName="description">
+          </td>
+          <td>
+            <input type="date" formControlName="programDate">
+          </td>
+            <td>
+              <button (click)="deleteProgram(i)">X</button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

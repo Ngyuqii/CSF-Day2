@@ -15,11 +15,12 @@ export class RsvpComponent implements OnInit {
 
   constructor(private fb: FormBuilder){};
 
+  //Initialize form creation
   ngOnInit(): void {
       this.rsvpForm = this.createForm();
   }
 
-  //Create form template with validation
+  //Method to create a form with form controls and validators
   private createForm(): FormGroup {
     return this.fb.group({
       name: this.fb.control<string>('', [Validators.required, Validators.minLength(3)]),
@@ -29,13 +30,13 @@ export class RsvpComponent implements OnInit {
     })
   }
 
-  //Method that return true if form input is not pristine and invalid
+  //Method that returns true if form input is not pristine and invalid
   invalidControl (ctrlName: string): boolean {
     const ctrl = this.rsvpForm.get(ctrlName) as FormControl;
     return ctrl.invalid && (!ctrl.pristine);
   }
 
-  //Method called upon ngSubmit
+  //Method called upon ngSubmit to retrieve the values of the form controls and create an RSVP object
   //const rsvp = this.rsvpForm.value as RSVP
   processForm() {
 
