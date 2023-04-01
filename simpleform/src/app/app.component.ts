@@ -8,9 +8,10 @@ import { Activity } from './models';
 })
 
 export class AppComponent {
-  
+
+  //Method to display event object passed from child component program
   processNewActivity(activity: Activity) {
-    console.info('>>>>Activity programs registered', activity)
+    console.info('Activity programs registered >>>', activity);
   }
 
 }

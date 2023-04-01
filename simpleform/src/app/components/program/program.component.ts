@@ -48,15 +48,15 @@ export class ProgramComponent implements OnInit {
   }
 
   //Method to remove form from the program array at index parameter
-  deleteProgram(index: number) {
-    this.programArray.removeAt(index);
-    console.log('Removed program line >>>', index);
+  deleteProgram(i: number) {
+    this.programArray.removeAt(i);
+    console.log('Removed program line >>>', i);
   }
 
-  //Method that returns true if form input is not pristine and invalid
+  //Method that returns true if form input is invalid
   invalidControl(ctrlName: string): boolean {
     const ctrl = this.activityForm.get(ctrlName) as FormControl;
-    return ctrl.invalid && (!ctrl.pristine);
+    return ctrl.invalid;
   }
 
   //Method that returns true if form is invalid or program array has no element
@@ -64,7 +64,9 @@ export class ProgramComponent implements OnInit {
     return this.activityForm.invalid || this.programArray.length <= 0;
   }
 
-  //ngSubmit
+  //Method upon ngSubmit to retrieve values of the form controls and set into Activity object
+  //Emits the "activities" object as an event
+  //Resets activityForm
   registerActivity() {
     const activities = this.activityForm.value as Activity;
     this.onNewActivity.next(activities);
